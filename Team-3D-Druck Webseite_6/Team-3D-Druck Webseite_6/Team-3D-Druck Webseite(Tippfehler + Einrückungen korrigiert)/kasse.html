@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team 3D Druck</title>
+    <link rel="stylesheet" href="./css/mystyle.css">
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div id="logo">
+          <a href="index.html"><h1><span class="akzent">Team</span>3D-Druck</h1></a>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="konfigurator.html">Konfigurator</a></li>
+            <li class="aktuell"><a href="warenkorb.html">Warenkorb</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        <h1 class="seiten-titel">Rechnungsdaten</h1>
+        <form class="kontakt">
+          <div>
+            <label>Name</label><br>
+            <input id="name" type="text" placeholder="Mustermann">
+          </div>
+          <div>
+            <label>Vorname:</label><br>
+            <input id="first_name" type="text" placeholder="Max">
+          </div>
+          <div>
+            <label>Telefon-Nr.:</label><br>
+            <input id="tel" type="number" placeholder="Tel">
+          </div>
+          <div>
+            <label>E-Mail Addresse:</label><br>
+            <input id="email" type="email" placeholder="E-Mail">
+          </div>
+          <div>
+            <label>Land/Region:</label><br>
+            <input id="country" type="text" placeholder="Deutschland">
+          </div>
+          <div>
+            <label>Ort/Stadt:</label><br>
+            <input id="city" type="text" placeholder="Berlin">
+          </div>
+          <div>
+            <label>Straße und Hausnummer:</label><br>
+            <input id="street" type="text" placeholder="Straßenname und Hausnummer">
+          </div>
+          <div>
+            <label>Postleitzahl:</label><br>
+            <input id="postcode" type="number" placeholder="12345">
+          </div>
+          <div>
+            <label>Bestellhinweis: (optional)</label><br>
+            <textarea id="message" type="text" rows="4" placeholder="Nachricht"></textarea>
+          </div>
+          <a href="danke.html"><button type="button" class="button_1">Senden</button></a>
+        </form>
+        <aside id="sidebar">
+          <div class="dunkel">
+            <img src="./img/profil.png">
+            <h3>Ansprechpartner:</h3>
+            <p>3D-Druck Team</p>
+            <p>Musterstrasse 1</p>
+            <p>Musterstadt</p>
+            <p>0123/4567890</p>
+            <p><a href="index.html">Team3D-Druck.de</a></p>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <footer>
+      <section id="newsletter">
+        <div class="container">
+          <h1>Abonnieren Sie unseren Newsletter</h1>
+          <form>
+            <input type="email" placeholder="E-Mail eingeben">
+            <button type="submit" class="button_1">Abonnieren</button>
+          </form>
+        </div>
+      </section>
+      <p>Team 3D-Druck, Copyright &copy; 2023</p>
+    </footer>
+  </body>
+</html>

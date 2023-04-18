@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="de"> 
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team 3D Druck</title>
+    <link rel="stylesheet" href="./css/mystyle.css">
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div id="logo">
+          <a href="index.html"><h1><span class="akzent">Team</span>3D-Druck</h1></a>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="konfigurator.html">Konfigurator</a></li>
+            <li class="aktuell"><a href="warenkorb.html">Warenkorb</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        <h1 class="seiten-titel">Warenkorb</h1>
+        <table class="warenkorb">
+          <tr>
+            <th>Pos</th>
+            <th>Artikel</th>
+            <th>Preis</th>
+            <th>Anzahl</th>
+            <th>Gesamtpreis</th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td><img id="warenkorb_image" src="./img/stlview.jpg"></td>
+            <td>41€</td>
+            <td>
+              2 Stk
+              <br>
+              <button id="value_plus" type="button" class="button_1">&plus;</button>
+              <button id="value_minus" type="button" class="button_1">&minus;</button>
+              <button id="value_delete" type="button" class="button_1">&#128465;</button>
+            </td>
+            <td>82,00€</td>
+          </tr>
+		      <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Versand:</td>
+            <td>
+              <div class="container_shipping">
+                <input type="radio" id="standard" name="shipping" value="standard" checked="checked">
+                <label for="standard">DHL Standard +4,99€</label><br>
+                <input type="radio" id="express" name="shipping" value="standard">
+                <label for="standard">DHL Express +16,99€</label><br>
+				      </div>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Summe:</td>
+            <td>86,99€</td>
+          </tr>
+        </table>
+		    <br><br>
+        <a href="kasse.html"><button id="zur_kasse" type="submit" class="button_1">Zur Kasse</button></a>
+		    <br><br><br>
+		  </div>
+    </main>
+
+    <footer>
+      <section id="newsletter">
+        <div class="container">
+          <h1>Abonnieren Sie unseren Newsletter</h1>
+          <form>
+            <input type="email" placeholder="E-Mail eingeben">
+            <button type="submit" class="button_1">Abonnieren</button>
+          </form>
+        </div>
+      </section>
+      <p>Team 3D-Druck, Copyright &copy; 2023</p>
+    </footer>
+  </body>
+</html>

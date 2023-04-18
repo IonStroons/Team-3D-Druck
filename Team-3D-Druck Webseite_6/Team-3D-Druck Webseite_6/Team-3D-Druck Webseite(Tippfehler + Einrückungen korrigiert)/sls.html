@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team 3D Druck</title>
+    <link rel="stylesheet" href="./css/mystyle.css">
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div id="logo">
+          <a href="index.html"><h1><span class="akzent">Team</span>3D-Druck</h1></a>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li class="aktuell"><a href="konfigurator.html">Konfigurator</a></li>
+            <li><a href="warenkorb.html">Warenkorb</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    
+    <main>
+      <h1 class="seiten-titel">SLS Druck</h1>
+	    <table class="info_table left">
+        <tbody>
+          <tr>
+            <td><img id="stl_viewer" src="./img/stlview.jpg"></td>
+          </tr>
+          <tr>
+            <td>
+              <table class="info_table left_2">
+                <tbody>
+                  <tr>
+                    <td>
+                      <input  type="file" id="myFile" name="file"></input>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <button type="submit" class="button_1">Datei hochladen</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <table class="info_table right">
+                <tbody>
+                  <tr>
+                    <td>
+                      <label id="Preis">Platzhalter Stückpreis</label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <button type="submit" class="button_1">Preis berechnen</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+	    </table>
+      <table class="info_table right">
+        <tbody>
+          <tr>
+            <td class="beschreibung">
+              <h2>Beschreibung</h2>
+              <p>
+                Der SLS-Druck, auch bekannt als Selective Laser Sintering, ist ein 3D-Druckverfahren, bei dem pulverförmige Materialien Schicht für Schicht mithilfe eines Laserstrahls zu einem festen Teil aufgebaut werden. Das Verfahren wurde Anfang der 1980er Jahre entwickelt und hat seitdem eine wichtige Rolle in der industriellen Fertigung von Prototypen und Kleinserien gespielt.<br>
+                Das SLS-Verfahren beginnt damit, dass eine Schicht aus pulverförmigem Material in die Druckkammer gelegt wird. Ein Laserstrahl scannt dann die Oberfläche der Schicht und erhitzt das Pulver punktgenau an den Stellen, an denen das Teil formuliert werden soll. Das erhitzte Pulver schmilzt nicht vollständig, sondern verschweißt lediglich die Partikel miteinander, was zu einer festen Struktur führt.<br>
+                Nachdem die erste Schicht aufgebaut wurde, wird eine neue Schicht aus pulverförmigem Material aufgelegt und der Prozess wiederholt. Dieser Vorgang wird Schicht für Schicht wiederholt, bis das gesamte Teil aufgebaut ist.<br>
+                Einer der Vorteile des SLS-Drucks ist die gleichmäßige Oberfläche. Da keine Stützstruktur erforderlich ist, bleiben hiervon keine Unreinheiten zurück. Zudem sind die Schichten kaum bis gar nicht sichtbar, da beim Drucken keine Wulst entsteht, wie beim FDM-Druck.
+                Ein weiterer Vorteil ist die hohe Genauigkeit und die Möglichkeit komplexe geometrische Formen herzustellen, da die Schichten so dünn sind und der Laserstrahl sehr präzise arbeitet. Es ermöglicht auch das Drucken von Teilen mit überlappenden Strukturen und Hohlräumen, was für den Einsatz in der Medizintechnik und der Luft- und Raumfahrt von großem Vorteil ist.<br>
+                Insgesamt ist der SLS-Druck ein wichtiges und vielseitiges Verfahren in der 3D-Druckindustrie, das für die Fertigung von Prototypen und Kleinserien in einer Vielzahl von Branchen verwendet wird. Er ermöglicht die Herstellung von Teilen mit komplexen geometrischen Formen und überlappenden Strukturen. Obwohl er in der Regel teurer ist als der FDM-Druck und die Nachbearbeitung in der Regel mehr Aufwand erfordert, ist er aufgrund seiner Genauigkeit und Materialvielfalt eine wertvolle Technologie für die industrielle Fertigung.<br>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <table class="info_table left">
+                <tbody>
+                  <tr>
+                    <td>
+                      Auswahloptionen:
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <label>Drucker:</label>
+                      <select name="printer" id="sls_printer">
+                        <option value="Formlabs_Fuse_1">Formlabs Fuse 1+</option>
+                        <option value="Wematter_Gravity">Wematter Gravity</option>
+                        <option value="Sinterit_Lisa">Sinterit Lisa Pro</option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <label>Material:</label>
+                      <select name="material" id="sls_printer">
+                        <option value="Nylon_11">Nylon 11 Powder</option>
+                        <option value="Nylon_12">Nylon 12 Powder</option>
+                        <option value="TPU">TPU</option>
+                      </select>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <table class="info_table right">
+                <tbody>
+                  <tr>
+                    <td>
+                      <button id="to_cart" class="button_1">Zum Warenkorb hinzufügen</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+	    </table>
+    </main>
+
+
+
+    <footer>
+      <section id="newsletter">
+        <div class="container">
+          <h1>Abonnieren Sie unseren Newsletter</h1>
+          <form>
+            <input type="email" placeholder="E-Mail eingeben">
+            <button type="submit" class="button_1">Abonnieren</button>
+          </form>
+        </div>
+      </section>
+      <p>Team 3D-Druck, Copyright &copy; 2023</p>
+    </footer>
+  </body>
+</html>
