@@ -14,4 +14,4 @@ Das Programm können Sie jederzeit mit `ctrl+c` beenden.
 
 ## Server
 
-Serverseitig wird das Node.JS Modul [ws](https://www.npmjs.com/package/ws) eingesetzt.
+Serverseitig wird das Node.JS Modul [Express](https://www.npmjs.com/package/express) eingesetzt.
