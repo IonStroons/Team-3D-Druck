@@ -1,3 +1,5 @@
+const port = 3000;
+
 // Load express module
 var express = require('express');
 
@@ -11,4 +13,6 @@ var path = require('path');
 
 app.use(express.static(path.resolve('./public')));
 
-var server = app.listen(3000);
+var server = app.listen(port);
+
+console.log(`Server is running on http://localhost:${port}`);
