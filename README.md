@@ -7,7 +7,12 @@ $ npm install
 $ npm run start
 ```
 
-Öffnen Sie dann einen Browser auf [http://localhost:3000/index.html](http://localhost:3000/index.html).
+Falls nicht gestartet werden kann dann eventuell noch 
+```shell
+$ npm update
+```
+
+Öffnen Sie dann einen Browser auf [http://localhost:8000/index.html](http://localhost:8000/index.html).
 
 Das Programm können Sie jederzeit mit `ctrl+c` beenden.
 
