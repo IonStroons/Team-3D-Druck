@@ -33,16 +33,18 @@
             <td>
               <table class="info_table left_2">
                 <tbody>
-                  <tr>
-                    <td>
-                      <input  type="file" id="myFile" name="file"></input>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <button type="submit" class="button_1">Datei hochladen</button>
-                    </td>
-                  </tr>
+                  <form id="uploadForm" enctype="multipart/form-data" method="post">
+                    <tr>
+                      <td>
+                        <input  type="file" id="myFile" name="myFile"></input>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <input type="submit" class="button_1" value="Datei hochladen"></input>
+                      </td>
+                    </tr>
+                  </form>
                 </tbody>
               </table>
               <table class="info_table right">
