@@ -4,11 +4,11 @@
 
 ```shell
 $ npm install
-$ npm run start
+$ npm start
 ```
 
 Falls nicht gestartet werden kann dann eventuell noch 
-```shell 
+```shell
 $ npm update
 ```
 
