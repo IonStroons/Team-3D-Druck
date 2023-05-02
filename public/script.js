@@ -24,7 +24,9 @@ $('#bestellen').click(function() {
         data: JSON.stringify(obj)
     }).done(function (response) {
         console.log(response);
-        $('#output').html(JSON.stringify(response));
+        //$('#output').html(JSON.stringify(response));
+        $('#output').html('<p>Informationen erfolgreich gesendet</p>');
+        setTimeout("location.href = 'danke.html';", 2000);
     }).fail(function (jqXHR, statusText, error) {
         console.log('Response Code: ' + jqXHR.status + ' - Fehlermeldung: ' + jqXHR.responseText);
         $('#output').html('Ein Fehler ist aufgetreten');
@@ -54,14 +56,14 @@ $('#uploadForm').submit(function(event) {
     .done(function(response) {
         console.log('response received');
         console.log(response);
-        $('#output').html('<p>Operation erfolgreich</p>');
-        $('#output').append('<p>Nachricht: ' + JSON.stringify(response) + '</p>');
+        $('#output').html('<p>Datei erfolgreich hochgeladen</p>');
+        //$('#output').append('<p>Nachricht: ' + JSON.stringify(response) + '</p>');
     })
     .fail(function(xhr) {
         console.log('error received');
         console.log(xhr);
         $('#output').html('<p>Es ist ein Fehler aufgetreten</p>');
-        $('#output').append('<p>Status: ' + xhr.status + '</p>');
-        $('#output').append('<p>Nachricht: ' + xhr.responseText + '</p>');
+        //$('#output').append('<p>Status: ' + xhr.status + '</p>');
+        //$('#output').append('<p>Nachricht: ' + xhr.responseText + '</p>');
     });
 });
