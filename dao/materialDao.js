@@ -1,6 +1,6 @@
 const helper = require('../helper.js');
 
-class BestellformularDao {
+class MaterialDao {
 
     constructor(dbConnection) {
         this._conn = dbConnection;
@@ -11,7 +11,7 @@ class BestellformularDao {
     }
 
     loadById(id) {
-        var sql = 'SELECT * FROM bestellformular WHERE id=?';
+        var sql = 'SELECT * FROM Material WHERE id=?';
         var statement = this._conn.prepare(sql);
         var result = statement.get(id);
 
@@ -22,7 +22,7 @@ class BestellformularDao {
     }
 
     loadAll() {
-        var sql = 'SELECT * FROM bestellformular';
+        var sql = 'SELECT * FROM Material';
         var statement = this._conn.prepare(sql);
         var result = statement.all();
 
@@ -33,7 +33,7 @@ class BestellformularDao {
     }
 
     exists(id) {
-        var sql = 'SELECT COUNT(id) AS cnt FROM bestellformular WHERE id=?';
+        var sql = 'SELECT COUNT(id) AS cnt FROM Material WHERE id=?';
         var statement = this._conn.prepare(sql);
         var result = statement.get(id);
 
@@ -43,10 +43,10 @@ class BestellformularDao {
         return false;
     }
 
-    create(name = '', vorname = '', email = '', land = '', ort = '', strasse_hausnummer = '', tel , plz, hinweis = '') {
-        var sql = 'INSERT INTO bestellformular (name,vorname,email,land,ort,strasse_hausnummer,tel,plz,hinweis) VALUES (?,?,?,?,?,?,?,?,?)';
+    create(typ = '', material = '', masse) {
+        var sql = 'INSERT INTO Drucker (typ,material,masse) VALUES (?,?,?)';
         var statement = this._conn.prepare(sql);
-        var params = [name, vorname, email, land, ort, strasse_hausnummer, tel, plz, hinweis];
+        var params = [typ, material, masse];
         var result = statement.run(params);
 
         if (result.changes != 1) 
@@ -55,10 +55,10 @@ class BestellformularDao {
         return this.loadById(result.lastInsertRowid);
     }
 
-    update(id, name = '', vorname = '', email = '', land = '', ort = '', strasse_hausnummer = '', tel , plz, hinweis = '') {
-        var sql = 'UPDATE bestellformular SET name=?,vorname=?,email=?,land=?,ort=?,strasse_hausnummer=?,tel=?,plz=?,hinweis=? WHERE id=?';
+    update(id, typ = '', material = '', masse) {
+        var sql = 'UPDATE Drucker SET typ=?,material=?,masse=? WHERE id=?';
         var statement = this._conn.prepare(sql);
-        var params = [id, name, vorname, email, land, ort, strasse_hausnummer, tel, plz, hinweis];
+        var params = [id, typ, material, masse];
         var result = statement.run(params);
 
         if (result.changes != 1) 
@@ -69,7 +69,7 @@ class BestellformularDao {
 
     delete(id) {
         try {
-            var sql = 'DELETE FROM bestellformular WHERE id=?';
+            var sql = 'DELETE FROM Material WHERE id=?';
             var statement = this._conn.prepare(sql);
             var result = statement.run(id);
 
@@ -83,8 +83,8 @@ class BestellformularDao {
     }
 
     toString() {
-        console.log('bestellformularDao [_conn=' + this._conn + ']');
+        console.log('materialDao [_conn=' + this._conn + ']');
     }
 }
 
-module.exports = BestellformularDao;
+module.exports = MaterialDao;
