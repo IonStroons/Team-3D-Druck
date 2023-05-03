@@ -59,123 +59,15 @@ try {
     // binding endpoints
     const TOPLEVELPATH = '/api';
     console.log('Binding enpoints, top level Path at ' + TOPLEVELPATH);
-    
-    var serviceRouter = require('./services/land.js');
+
+    var serviceRouter = require('./services/bestellformular.js');
     app.use(TOPLEVELPATH, serviceRouter);
-
-
-
-
-    
-
-    serviceRouter = require('./services/bestellformular.js');
-    app.use(TOPLEVELPATH, serviceRouter);
-
-
-
-
-
-
-    serviceRouter = require('./services/adresse.js');
-    app.use(TOPLEVELPATH, serviceRouter);
-
-    serviceRouter = require('./services/person.js');
-    app.use(TOPLEVELPATH, serviceRouter);
-
-
-    
-    serviceRouter = require('./services/branche.js');
-    app.use(TOPLEVELPATH, serviceRouter);
-
-    serviceRouter = require('./services/firma.js');
-    app.use(TOPLEVELPATH, serviceRouter);
-
-
     
     serviceRouter = require('./services/download.js');
     app.use(TOPLEVELPATH, serviceRouter);
 
-
-
-    serviceRouter = require('./services/termin.js');
-    app.use(TOPLEVELPATH, serviceRouter);
-
-    
-    
-    serviceRouter = require('./services/produktkategorie.js');
-    app.use(TOPLEVELPATH, serviceRouter);
-
     serviceRouter = require('./services/zahlungsart.js');
     app.use(TOPLEVELPATH, serviceRouter);
-
-    serviceRouter = require('./services/mehrwertsteuer.js');
-    app.use(TOPLEVELPATH, serviceRouter);
-
-    serviceRouter = require('./services/produktbild.js');
-    app.use(TOPLEVELPATH, serviceRouter);
-
-    serviceRouter = require('./services/produkt.js');
-    app.use(TOPLEVELPATH, serviceRouter);
-
-
-    serviceRouter = require('./services/bestellung.js');
-    app.use(TOPLEVELPATH, serviceRouter);
-
-
-    serviceRouter = require('./services/speisenart.js');
-    app.use(TOPLEVELPATH, serviceRouter);
-
-    serviceRouter = require('./services/einheit.js');
-    app.use(TOPLEVELPATH, serviceRouter);
-
-    serviceRouter = require('./services/zutat.js');
-    app.use(TOPLEVELPATH, serviceRouter);
-
-    serviceRouter = require('./services/bewertung.js');
-    app.use(TOPLEVELPATH, serviceRouter);
-
-    serviceRouter = require('./services/gericht.js');
-    app.use(TOPLEVELPATH, serviceRouter);
-
-
-
-    serviceRouter = require('./services/benutzerrolle.js');
-    app.use(TOPLEVELPATH, serviceRouter);
-
-    serviceRouter = require('./services/forumsbenutzer.js');
-    app.use(TOPLEVELPATH, serviceRouter);
-
-    serviceRouter = require('./services/forumsbereich.js');
-    app.use(TOPLEVELPATH, serviceRouter);
-
-
-
-    serviceRouter = require('./services/filmgenre.js');
-    app.use(TOPLEVELPATH, serviceRouter);
-
-    serviceRouter = require('./services/kinosaal.js');
-    app.use(TOPLEVELPATH, serviceRouter);
-
-    serviceRouter = require('./services/reservierer.js');
-    app.use(TOPLEVELPATH, serviceRouter);
-
-    serviceRouter = require('./services/film.js');
-    app.use(TOPLEVELPATH, serviceRouter);
-
-    serviceRouter = require('./services/reservierung.js');
-    app.use(TOPLEVELPATH, serviceRouter);
-    
-    serviceRouter = require('./services/vorstellung.js');
-    app.use(TOPLEVELPATH, serviceRouter);
-
-
-    serviceRouter = require('./services/benutzer.js');
-    app.use(TOPLEVELPATH, serviceRouter);
-
-
-    serviceRouter = require('./services/galerie.js');
-    app.use(TOPLEVELPATH, serviceRouter);
-
 
     serviceRouter = require('./services/dateiuploadeinzeln.js');
     app.use(TOPLEVELPATH, serviceRouter);
@@ -184,7 +76,6 @@ try {
     app.use(TOPLEVELPATH, serviceRouter);
 
 
-    
     // send default error message if no matching endpoint found
     app.use(function (request, response) {
         console.log('Error occured, 404, resource not found');
@@ -197,6 +88,7 @@ try {
 
     var webServer = app.listen(HTTP_PORT, () => {
         console.log('Listening at localhost, port ' + HTTP_PORT);
+        console.log('http://localhost:' + HTTP_PORT);
         console.log('\nUsage: http://localhost:' + HTTP_PORT + TOPLEVELPATH + "/SERVICENAME/SERVICEMETHOD/....");
         console.log('\nVersion 4.0, 21.02.2023\nSommersemester 2023, HS Albstadt-Sigmaringen, INF');
         console.log('\n\n-----------------------------------------');
