@@ -22,7 +22,7 @@ $(document).ready(function() {
             if (obj.typ == "sls"){
                 // option erstellen
                 option = $('<option>');
-                option.prop('value', obj.drucker);
+                option.prop('value', obj.id);
                 option.text(obj.drucker);
                 select.append(option);
             }
@@ -60,7 +60,7 @@ $(document).ready(function() {
             if (obj.typ == "sls"){
                 // option erstellen
                 option = $('<option>');
-                option.prop('value', obj.material);
+                option.prop('value', obj.id);
                 option.text(obj.material);
                 select.append(option);
             }
