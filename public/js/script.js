@@ -14,7 +14,7 @@ $('#bestellen').click(function() {
     
     
     
-    var obj = { 'name': name, 'vorname': vorname, 'email': email, 'land': land, 'ort': ort, 'strasse_hausnummer': strasse_hausnummer, 'tel': tel, 'plz': plz, 'hinweis': hinweis, };
+    var obj = { 'name': name, 'vorname': vorname, 'email': email, 'land': land, 'ort': ort, 'strasse_hausnummer': strasse_hausnummer, 'tel': tel, 'plz': plz, 'hinweis': hinweis };
     
     $.ajax({
         url: 'http://localhost:8000/api/bestellformular',
@@ -66,4 +66,32 @@ $('#uploadForm').submit(function(event) {
         //$('#output').append('<p>Status: ' + xhr.status + '</p>');
         //$('#output').append('<p>Nachricht: ' + xhr.responseText + '</p>');
     });
+});
+
+/* Funktionen für Newsletter */
+$('#newsletter_submit').click(function() {
+    console.log('button newsletter_submit clicked');
+
+    var email = document.querySelector("#newsletter_input").value;
+
+    if(email == ""){
+        alert("E-Mail nicht vorhanden!");
+    }else{  
+        var obj = {'email': email};
+        
+        $.ajax({
+            url: 'http://localhost:8000/api/newsletter',
+            method: 'post',
+            contentType: 'application/json; charset=utf-8',
+            cache: false,
+            data: JSON.stringify(obj)
+        }).done(function (response) {
+            console.log(response);
+            //$('#output').html(JSON.stringify(response));
+            $('#output_newsletter').html('<p>Informationen erfolgreich gesendet</p>');
+        }).fail(function (jqXHR, statusText, error) {
+            console.log('Response Code: ' + jqXHR.status + ' - Fehlermeldung: ' + jqXHR.responseText);
+            $('#output_newsletter').html('Ein Fehler ist aufgetreten');
+        });
+    }
 });
