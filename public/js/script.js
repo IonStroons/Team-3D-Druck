@@ -43,6 +43,8 @@ $('#uploadForm').submit(function(event) {
     // convert data of form to object
     var formData = new FormData(this);
 
+    console.log(formData.name);
+
     // send form with ajax
     $.ajax({
         url: 'http://localhost:8000/api/dateiuploadeinzeln',
