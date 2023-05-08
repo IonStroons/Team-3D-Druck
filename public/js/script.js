@@ -1,6 +1,3 @@
-
-
-
 /* Funktionen für Bestellformular */
 $('#bestellen').click(function() {
     console.log('button bestellen clicked');
@@ -62,6 +59,8 @@ $('#uploadForm').submit(function(event) {
         console.log('response received');
         console.log(response);
         $('#output').html('<p>Datei erfolgreich hochgeladen</p>');
+        showParameterSelection();
+        calculate_price();
         //$('#output').append('<p>Nachricht: ' + JSON.stringify(response) + '</p>');
     })
     .fail(function(xhr) {
@@ -73,6 +72,17 @@ $('#uploadForm').submit(function(event) {
     });
 });
 
+/* Show Upload Button */
+function showUploadButton(){
+    document.getElementById ("upload_button").style .visibility ="visible";
+}
+
+function showParameterSelection(){
+    const nodeList = document.querySelectorAll(".parameter_selection");
+    for (let i = 0; i < nodeList.length; i++) {
+        nodeList[i].style.visibility = "visible"
+    }
+}
 /* Funktionen für Newsletter */
 $('#newsletter_submit').click(function() {
     console.log('button newsletter_submit clicked');

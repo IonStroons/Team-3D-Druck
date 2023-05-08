@@ -40,12 +40,12 @@
                   <form id="uploadForm" enctype="multipart/form-data" method="post">
                     <tr>
                       <td>
-                        <input  type="file" id="myFile" name="myFile"></input>
+                        <input  type="file" id="myFile" name="myFile" onchange="showUploadButton()"></input>
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        <input type="submit" class="button_1" value="Datei hochladen"></input>
+                        <input id="upload_button" type="submit" class="button_1" value="Datei hochladen"></input>
                         <div id="output"></div>
                       </td>
                     </tr>
@@ -57,11 +57,6 @@
                   <tr>
                     <td>
                       <label id="Preis"></label>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <button id="calculate_price" type="button" class="button_1">Preis berechnen</button>
                     </td>
                   </tr>
                 </tbody>
@@ -84,7 +79,7 @@
           </tr>
           <tr>
             <td>
-              <table class="info_table left">
+              <table class="info_table left parameter_selection">
                 <tbody>
                   <tr>
                     <td id="sla_printer">
@@ -98,7 +93,7 @@
                   </tr>
                 </tbody>
               </table>
-              <table class="info_table right">
+              <table class="info_table right parameter_selection">
                 <tbody>
                   <tr>
                     <td>
@@ -112,6 +107,7 @@
         </tbody>
 	    </table>
     </main>
+    
     <footer>
       <section id="newsletter">
         <div class="container">

@@ -12,8 +12,7 @@ $(document).ready(function() {
         console.log(response);
             
         // unterobjekte erstellen
-        var select = $('<select>');
-        select.prop('id', 'sls_printer_selection');
+        var select = $('<select id="sls_printer_selection" onchange="calculate_price()">');
             
         for (i = 0; i < response.length; i++) {
             // Objekt aus array holen
@@ -50,8 +49,7 @@ $(document).ready(function() {
         console.log('Data loaded successfully');
         console.log(response);
             
-        var select = $('<select>');
-        select.prop('id', 'sls_material_selection');
+        var select = $('<select id="sls_material_selection" onchange="calculate_price()">');
             
         for (i = 0; i < response.length; i++) {
             // Objekt aus array holen
@@ -77,7 +75,7 @@ $(document).ready(function() {
 });
 
 /* Funktionen für Preis berechnen */
-$('#calculate_price').click(function() {
+function calculate_price() {
     console.log('button calculate_price clicked');
 
     var materialid = document.querySelector("#sls_material_selection").value;
@@ -98,4 +96,4 @@ $('#calculate_price').click(function() {
         console.log('Response Code: ' + jqXHR.status + ' - Fehlermeldung: ' + jqXHR.responseText);
         $('#output_newsletter').html('Ein Fehler ist aufgetreten');
     });
-});
+};
