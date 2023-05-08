@@ -43,10 +43,10 @@ class MaterialDao {
         return false;
     }
 
-    create(typ = '', material = '', masse) {
-        var sql = 'INSERT INTO Drucker (typ,material,masse) VALUES (?,?,?)';
+    create(typ = '', material = '', masse, preis) {
+        var sql = 'INSERT INTO Drucker (typ,material,masse,preis) VALUES (?,?,?,?)';
         var statement = this._conn.prepare(sql);
-        var params = [typ, material, masse];
+        var params = [typ, material, masse, preis];
         var result = statement.run(params);
 
         if (result.changes != 1) 
@@ -55,10 +55,10 @@ class MaterialDao {
         return this.loadById(result.lastInsertRowid);
     }
 
-    update(id, typ = '', material = '', masse) {
+    update(id, typ = '', material = '', masse, preis) {
         var sql = 'UPDATE Drucker SET typ=?,material=?,masse=? WHERE id=?';
         var statement = this._conn.prepare(sql);
-        var params = [id, typ, material, masse];
+        var params = [id, typ, material, masse, preis];
         var result = statement.run(params);
 
         if (result.changes != 1) 

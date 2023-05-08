@@ -57,6 +57,8 @@ serviceRouter.post("/material", function(request, response) {
         errorMsgs.push("Material fehlt");
     if (helper.isUndefined(request.body.masse)) 
         errorMsgs.push("Masse fehlt");
+    if (helper.isUndefined(request.body.preis)) 
+    errorMsgs.push("Masse fehlt");
     
     if (errorMsgs.length > 0) {
         console.log("Service material: Creation not possible, data missing");
@@ -66,7 +68,7 @@ serviceRouter.post("/material", function(request, response) {
 
     const materialDao = new MaterialDao(request.app.locals.dbConnection);
     try {
-        var obj = materialDao.create(request.body.typ, request.body.material, request.body.masse);
+        var obj = materialDao.create(request.body.typ, request.body.material, request.body.masse, request.body.preis);
         console.log("Service material: Record inserted");
         response.status(200).json(obj);
     } catch (ex) {
@@ -87,6 +89,8 @@ serviceRouter.put("/material", function(request, response) {
         errorMsgs.push("Material fehlt");
     if (helper.isUndefined(request.body.masse)) 
         errorMsgs.push("Masse fehlt");
+    if (helper.isUndefined(request.body.preis)) 
+    errorMsgs.push("Masse fehlt");
     
     if (errorMsgs.length > 0) {
         console.log("Service material: Creation not possible, data missing");
@@ -96,7 +100,7 @@ serviceRouter.put("/material", function(request, response) {
 
     const materialDao = new MaterialDao(request.app.locals.dbConnection);
     try {
-        var obj = materialDao.update(request.body.id, request.body.typ, request.body.material, request.body.masse);
+        var obj = materialDao.update(request.body.id, request.body.typ, request.body.material, request.body.masse, request.body.preis);
         console.log("Service material: Record updated, id=" + request.body.id);
         response.status(200).json(obj);
     } catch (ex) {
