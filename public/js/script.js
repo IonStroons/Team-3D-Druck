@@ -97,8 +97,8 @@ $('#newsletter_submit').click(function() {
 });
 
 /* Funktionen für Preis berechnen */
-$('#calculate_prise').click(function() {
-    console.log('button newsletter_submit clicked');
+$('#calculate_price').click(function() {
+    console.log('button calculate_price clicked');
 
     var materialid = document.querySelector("#fdm_printer_selection").value;
     console.log(materialid);
