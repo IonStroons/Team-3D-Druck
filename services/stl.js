@@ -1,16 +1,23 @@
 const NodeStl = require("node-stl");
 const helper = require('../helper.js');
+const MaterialDao = require("../dao/materialDao.js");
 const express = require('express');
 var serviceRouter = express.Router();
 
 console.log('- Service stl');
 
-serviceRouter.get('/stl', async(request, objponse) => {
+serviceRouter.post('/stl', async(request, objponse) => {
     console.log('Service stl called');
 
     try {
 
-        var stl = new NodeStl('./files/Benchy.stl', {density: 1.04});
+        const materialDao = new MaterialDao(request.app.locals.dbConnection);
+        
+        var material = materialDao.loadById(request.body.materialid);
+
+        dichte = material.masse
+        console.log(dichte);
+        var stl = new NodeStl('./files/Benchy.stl', {density:dichte});
 
 
         console.log('creating response');
