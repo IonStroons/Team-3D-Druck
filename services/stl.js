@@ -24,6 +24,8 @@ serviceRouter.post('/stl/fdm', async(request, objponse) => {
 
         var price = weight * material.preis;
 
+        var price = price.toFixed(2);
+
         console.log('creating response');
         var obj = {
             'price' : price
@@ -54,6 +56,8 @@ serviceRouter.post('/stl/sla', async(request, objponse) => {
 
         var price = weight * material.preis;
 
+        var price = price.toFixed(2);
+
         console.log('creating response');
         var obj = {
             'price' : price
@@ -83,6 +87,8 @@ serviceRouter.post('/stl/sls', async(request, objponse) => {
         var weight = stl.weight;
 
         var price = weight * material.preis;
+
+        var price = price.toFixed(2);
 
         console.log('creating response');
         var obj = {
