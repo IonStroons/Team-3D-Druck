@@ -1,3 +1,6 @@
+
+
+
 /* Funktionen für Bestellformular */
 $('#bestellen').click(function() {
     console.log('button bestellen clicked');
@@ -43,7 +46,7 @@ $('#uploadForm').submit(function(event) {
     // convert data of form to object
     var formData = new FormData(this);
 
-    console.log(formData.name);
+    console.log(formData);
 
     // send form with ajax
     $.ajax({
@@ -98,26 +101,3 @@ $('#newsletter_submit').click(function() {
     }
 });
 
-/* Funktionen für Preis berechnen */
-$('#calculate_price').click(function() {
-    console.log('button calculate_price clicked');
-
-    var materialid = document.querySelector("#fdm_printer_selection").value;
-    console.log(materialid);
-    var obj = {'materialid': materialid};
-    
-    $.ajax({
-        url: 'http://localhost:8000/api/stl',
-        method: 'post',
-        contentType: 'application/json; charset=utf-8',
-        cache: false,
-        data: JSON.stringify(obj)
-    }).done(function (response) {
-        console.log(response);
-        //$('#output').html(JSON.stringify(response));
-        $('#output_newsletter').html('<p>Informationen erfolgreich gesendet</p>');
-    }).fail(function (jqXHR, statusText, error) {
-        console.log('Response Code: ' + jqXHR.status + ' - Fehlermeldung: ' + jqXHR.responseText);
-        $('#output_newsletter').html('Ein Fehler ist aufgetreten');
-    });
-});

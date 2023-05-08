@@ -75,3 +75,29 @@ $(document).ready(function() {
         alert(jqXHR.responseText);
     });
 });
+
+/* Funktionen für Preis berechnen */
+$('#calculate_price').click(function() {
+    console.log('button calculate_price clicked');
+
+    var materialid = document.querySelector("#fdm_material_selection").value;
+    var filling = document.querySelector("#fdm_filling").value;
+    //console.log(materialid);
+    var obj = {'materialid': materialid, 'filling' : filling};
+    
+    $.ajax({
+        url: 'http://localhost:8000/api/stl/fdm',
+        method: 'post',
+        contentType: 'application/json; charset=utf-8',
+        cache: false,
+        data: JSON.stringify(obj)
+    }).done(function (response) {
+        console.log(response);
+        //$('#output').html(JSON.stringify(response));
+        $('#Preis').html('<label id="Preis">'+ response.price +'</label>');
+        
+    }).fail(function (jqXHR, statusText, error) {
+        console.log('Response Code: ' + jqXHR.status + ' - Fehlermeldung: ' + jqXHR.responseText);
+        $('#output_newsletter').html('Ein Fehler ist aufgetreten');
+    });
+});
