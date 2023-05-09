@@ -15,15 +15,16 @@ serviceRouter.post('/stl/fdm', async(request, objponse) => {
         var material = materialDao.loadById(request.body.materialid);
 
         var dichte = material.masse;
-
         var filling = request.body.filling;
+        var filename = request.body.filename;
 
-        var stl = new NodeStl('./files/Benchy.stl', {density:dichte});
+        filePath = './files/' + filename;
+
+        var stl = new NodeStl(filePath, {density:dichte});
 
         var weight = (stl.weight*filling);
 
         var price = weight * material.preis;
-
         var price = price.toFixed(2);
 
         console.log('creating response');
@@ -49,13 +50,15 @@ serviceRouter.post('/stl/sla', async(request, objponse) => {
         var material = materialDao.loadById(request.body.materialid);
 
         var dichte = material.masse;
+        var filename = request.body.filename;
 
-        var stl = new NodeStl('./files/Benchy.stl', {density:dichte});
+        filePath = './files/' + filename;
+
+        var stl = new NodeStl(filePath, {density:dichte});
 
         var weight = stl.weight;
 
         var price = weight * material.preis;
-
         var price = price.toFixed(2);
 
         console.log('creating response');
@@ -81,13 +84,15 @@ serviceRouter.post('/stl/sls', async(request, objponse) => {
         var material = materialDao.loadById(request.body.materialid);
 
         var dichte = material.masse;
+        var filename = request.body.filename;
 
-        var stl = new NodeStl('./files/Benchy.stl', {density:dichte});
+        filePath = './files/' + filename;
+
+        var stl = new NodeStl(filePath, {density:dichte});
 
         var weight = stl.weight;
 
         var price = weight * material.preis;
-
         var price = price.toFixed(2);
 
         console.log('creating response');

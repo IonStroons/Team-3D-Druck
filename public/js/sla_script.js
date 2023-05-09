@@ -77,10 +77,13 @@ $(document).ready(function() {
 /* Funktionen für Preis berechnen */
 function calculate_price() {
     console.log('change detekted calculation new Price');
+    var filePath = document.getElementById('myFile').value;
+    var filePathSplitt = filePath.split('\\');
+    var fileName = filePathSplitt[(filePathSplitt.length)-1];
 
     var materialid = document.querySelector("#sla_material_selection").value;
     //console.log(materialid);
-    var obj = {'materialid': materialid};
+    var obj = {'materialid': materialid, 'filename' : fileName};
     
     $.ajax({
         url: 'http://localhost:8000/api/stl/sla',
@@ -91,9 +94,9 @@ function calculate_price() {
     }).done(function (response) {
         console.log(response);
         //$('#output').html(JSON.stringify(response));
-        $('#Preis').html('<label id="Preis">'+ response.price +'</label>');
+        $('#Preis').html('<label id="Preis">'+ response.price +' €</label>');
     }).fail(function (jqXHR, statusText, error) {
         console.log('Response Code: ' + jqXHR.status + ' - Fehlermeldung: ' + jqXHR.responseText);
-        $('#output_newsletter').html('Ein Fehler ist aufgetreten');
+        console.log('Ein Fehler ist aufgetreten');
     });
 };

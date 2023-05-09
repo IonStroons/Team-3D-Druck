@@ -76,12 +76,15 @@ $(document).ready(function() {
 
 /* Funktionen für Preis berechnen */
 function calculate_price() {
-    console.log('button calculate_price clicked');
+    console.log('change detekted calculation new Price');
+    var filePath = document.getElementById('myFile').value;
+    var filePathSplitt = filePath.split('\\');
+    var fileName = filePathSplitt[(filePathSplitt.length)-1];
 
     var materialid = document.querySelector("#fdm_material_selection").value;
     var filling = document.querySelector("#fdm_filling").value;
     //console.log(materialid);
-    var obj = {'materialid': materialid, 'filling' : filling};
+    var obj = {'materialid': materialid, 'filling' : filling, 'filename' : fileName};
     
     $.ajax({
         url: 'http://localhost:8000/api/stl/fdm',
@@ -92,10 +95,10 @@ function calculate_price() {
     }).done(function (response) {
         console.log(response);
         //$('#output').html(JSON.stringify(response));
-        $('#Preis').html('<label id="Preis">'+ response.price +'</label>');
+        $('#Preis').html('<label id="Preis">'+ response.price +' €</label>');
         
     }).fail(function (jqXHR, statusText, error) {
         console.log('Response Code: ' + jqXHR.status + ' - Fehlermeldung: ' + jqXHR.responseText);
-        $('#output_newsletter').html('Ein Fehler ist aufgetreten');
+        console.log('Ein Fehler ist aufgetreten');
     });
 };
