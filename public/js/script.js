@@ -12,8 +12,6 @@ $('#bestellen').click(function() {
     var plz = document.querySelector("#postcode").value;
     var hinweis = document.querySelector("#message").value;
     
-    
-    
     var obj = { 'name': name, 'vorname': vorname, 'email': email, 'land': land, 'ort': ort, 'strasse_hausnummer': strasse_hausnummer, 'tel': tel, 'plz': plz, 'hinweis': hinweis };
     
     $.ajax({
@@ -74,7 +72,20 @@ $('#uploadForm').submit(function(event) {
 
 /* Show Upload Button */
 function showUploadButton(){
-    document.getElementById ("upload_button").style .visibility ="visible";
+    //Check File
+    var file = document.getElementById('myFile');
+
+    var ext = file.value.match(/\.([^\.]+)$/)[1];
+        switch (ext) {
+            case 'stl':
+            case 'STL':
+                //Show Upload Button
+                document.getElementById ("upload_button").style .visibility ="visible";
+                break;
+            default:
+                //Meldung für falsches Dateiformat
+                alert('Bitte gültige Datei auswählen!! (.stl,.STL)');
+        };
 }
 
 function showParameterSelection(){
