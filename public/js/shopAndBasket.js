@@ -1,56 +1,10 @@
 var basket = [];
 
-function renderProducts(parentNode, products) {
-    console.log('rendering products');
-
-    if (products.length == 0) {
-        console.log("no products received");
-        $(parentNode).append('<tr><td colspan="6" class="missingData">Keine Produkte vorhanden</td></tr>');
-    } else {
-        console.log("rendering " + products.length + " products");
-
-        $(products).each(function(idx, item) {
-            var node = $('<tr>');
-
-            node.append($('<td>').text(idx + 1));
-            node.append($('<td>').text(item.id));
-            node.append($('<td>').text(item.kategorie.bezeichnung));
-            node.append(
-                $('<td>')
-                    .append($('<a>')
-                        .attr('href', 'shopDetails.html?id=' + item.id)
-                        .text(item.bezeichnung)                    
-                    )            
-            );
-            node.append($('<td>').text(formatToEuro(item.bruttopreis)));
-            node.append(
-                $('<td>')
-                    .append($('<button>')
-                        .attr('type', 'button')
-                        .attr('onClick', 'jumpToDetails(' + item.id + ')')
-                        .text('Details')
-                    )
-                    .append($('<button>')
-                        .attr('type', 'button')
-                        .attr('onClick', 'addToBasket(' + item.id + ')')
-                        .text('Zum Warenkorb hinzufügen')
-                    )
-            );
-
-            $(parentNode).append(node);
-        });
-    }
-}
-
 function formatToEuro(val) {
     if (val === null || val === undefined) 
         val = 0.0;
     var asString = val.toFixed(2).toString();
     return asString.replace('.', ',') + " €";
-}
-
-function jumpToDetails(id) {
-    location.href = 'shopDetails.html?id=' + id;
 }
 
 function addToElementBasket(type) {
@@ -128,9 +82,9 @@ function addToBasket(printerid,materialid,filename,price,filling) {
 
     $.when(printerCall, materialCall).done(function(responsePrinterCall, responseMaterialCall){
         var printerToAdd = responsePrinterCall[0];
-        console.log(printerToAdd);
+        //console.log(printerToAdd);
         var materialToAdd = responseMaterialCall[0];
-        console.log(materialToAdd);
+        //console.log(materialToAdd);
         var productToAdd = {
             printer: printerToAdd,
             material: materialToAdd,
@@ -179,9 +133,9 @@ function addToBasket(printerid,materialid,filename,price,filling) {
         setJSONSessionItem('shoppingBasket', basket);
 
         // inform user
-        alert('Produkt ' + productToAdd + ' wurde zum Warenkorb hinzugefügt');
+        alert('Produkt wurde zum Warenkorb hinzugefügt');
 
-        });
+    });
 }
 
 function renderBasket(parentNode) {
