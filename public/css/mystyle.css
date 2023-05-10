@@ -16,6 +16,10 @@ body{
   overflow: hidden;
 }
 
+.bold{
+  font-weight: bold;
+}
+
 table, tr, td{
 	width: 100%;
 	border: none;
@@ -279,16 +283,16 @@ footer{
 }
 
 /* Warenkorb */
-.warenkorb tr,.warenkorb td,.warenkorb th {
+#warenkorb tr,#warenkorb td,#warenkorb th {
   border-bottom: 1px solid black;
   margin: 2em;
   text-align: center;
   padding: 1em;
 }
-.warenkorb td,th {
-  width: 25%;
+#warenkorb td,th {
+  width: 20%;
 }
-.warenkorb th {
+#warenkorb th {
   background-color: #1e81ce;
 }
 #warenkorb_image{

@@ -7,6 +7,13 @@ function formatToEuro(val) {
     return asString.replace('.', ',') + " €";
 }
 
+function formatToEuroData(val) {
+    if (val === null || val === undefined) 
+        val = 0.0;
+    var asString = val.toString();
+    return asString.replace('.', ',') + " €";
+}
+
 function addToElementBasket(type) {
     if (type == 'fdm'){
         var printerid = document.getElementById('fdm_printer_selection').value;
@@ -149,42 +156,49 @@ function renderBasket(parentNode) {
     // show message if no basket positions
     if (basket.length == 0) {
         console.log("no positions in basket");
-        $(parentNode).append('<tr><td colspan="6" class="missingData">Der Warenkorb ist leer</td></tr>');
+        console.log(parentNode);
+        $(parentNode).append('<tr><td colspan="6" id="missingData">Der Warenkorb ist leer</td></tr>');
     } else {
         var sum = 0.0;
-        var tax = 0.0;
-        var totalTax = 0.0;
         var totalSum = 0.0;
 
         $(basket).each(function (idx, item) {
             // calc position sum
-            sum = item.product.bruttopreis * item.amount;
-
-            // containing tax
-            tax = item.product.mehrwertsteueranteil * item.amount;
+            sum = item.product.price * item.amount;
 
             // add up totals
-            totalTax += tax;
             totalSum += sum;
 
             // create node
             var node = $('<tr>');
            
             node.append($('<td>').text(idx + 1));
-            node.append($('<td>').append(
-                $('<a>')
-                    .attr('href', 'shopDetails.html?id=' + item.product.id)
-                    .text(item.product.bezeichnung + ' (ID: ' + item.product.id + ')')
-            ));
-            node.append($('<td>').text(formatToEuro(item.product.bruttopreis)));
-            node.append($('<td>').text(item.amount));
+            node.append($('<td>').text(item.product.filename));
+            node.append($('<td>').text(formatToEuroData(item.product.price)));
+            node.append(
+                $('<td>')
+                .text(item.amount + ' Stk ')
+                .append($('<button>')
+                    .attr('type', 'button')
+                    .attr('class', 'button_1')
+                    .attr('onClick', 'decrementPosition(' + idx + ')')
+                    .text('-')
+                )
+                .append($('<button>')
+                .attr('type', 'button')
+                .attr('class', 'button_1')
+                .attr('onClick', 'incrementPosition(' + idx + ')')
+                .text('+')
+                )
+            );
             node.append($('<td>').text(formatToEuro(sum)));
             node.append(
                 $('<td>')
                     .append($('<button>')
                         .attr('type', 'button')
+                        .attr('class', 'button_1')
                         .attr('onClick', 'removeBasketPosition(' + idx + ')')
-                        .text('Entfernen')
+                        .text('🗑')
                     )
             );
 
@@ -194,9 +208,7 @@ function renderBasket(parentNode) {
 
         $(parentNode)
             .append('<tr><td colspan="6">&nbsp;</td></tr>')
-            .append('<tr><td colspan="4" class="rightBold">Gesamtsumme: </td><td class="bold">' + formatToEuro(totalSum) + '</td></tr>')
-            .append('<tr><td colspan="4" class="rightBold">enth. MwSt.: </td><td class="bold">' + formatToEuro(totalTax) + '</td></tr>')
-            .append('<tr><td colspan="6">&nbsp;</td></tr>');
+            .append('<tr><td colspan="4">Gesamtsumme: </td><td class="bold">' + formatToEuro(totalSum) + '</td></tr>')
     }
 }
 
@@ -218,7 +230,34 @@ function removeBasketPosition(idx) {
     }
 
     // redraw basket
-    renderBasket('#basket > tbody');
+    renderBasket('#warenkorb > tbody');
+}
+
+function incrementPosition(idx) {
+    console.log('increment basket position at idx=' + idx);
+        // increment position at idx
+        newAmount = basket[idx].amount + 1;
+        basket[idx].amount = newAmount;
+
+        // remember changes in localStorage
+        setJSONSessionItem('shoppingBasket', basket);
+    // redraw basket
+    renderBasket('#warenkorb > tbody');
+}
+
+function decrementPosition(idx) {
+    console.log('removing basket position at idx=' + idx);
+        // decrement position at idx
+        newAmount = basket[idx].amount - 1;
+        if (newAmount == 0){
+            removeBasketPosition(idx);
+        }else{
+            basket[idx].amount = newAmount;
+            // remember changes in localStorage
+            setJSONSessionItem('shoppingBasket', basket);
+        }
+    // redraw basket
+    renderBasket('#warenkorb > tbody');
 }
 
 function emptyBasket() {

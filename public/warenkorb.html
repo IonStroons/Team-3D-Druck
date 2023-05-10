@@ -28,48 +28,19 @@
     <main>
       <div class="container">
         <h1 class="seiten-titel">Warenkorb</h1>
-        <table class="warenkorb">
-          <tr>
-            <th>Pos</th>
-            <th>Artikel</th>
-            <th>Preis</th>
-            <th>Anzahl</th>
-            <th>Gesamtpreis</th>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td><img id="warenkorb_image" src="./img/stlview.jpg"></td>
-            <td>41€</td>
-            <td>
-              2 Stk
-              <br>
-              <button id="value_plus" type="button" class="button_1">&plus;</button>
-              <button id="value_minus" type="button" class="button_1">&minus;</button>
-              <button id="value_delete" type="button" class="button_1">&#128465;</button>
-            </td>
-            <td>82,00€</td>
-          </tr>
-		      <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Versand:</td>
-            <td>
-              <div class="container_shipping">
-                <input type="radio" id="standard" name="shipping" value="standard" checked="checked">
-                <label for="standard">DHL Standard +4,99€</label><br>
-                <input type="radio" id="express" name="shipping" value="standard">
-                <label for="standard">DHL Express +16,99€</label><br>
-				      </div>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Summe:</td>
-            <td>86,99€</td>
-          </tr>
+        <table id="warenkorb">
+          <thead>
+            <tr>
+              <th>Pos</th>
+              <th>Artikel</th>
+              <th>Preis</th>
+              <th>Anzahl</th>
+              <th>Gesamtpreis</th>
+              <th>Optionen</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
         </table>
 		    <br><br>
         <a href="kasse.html"><button id="zur_kasse" type="submit" class="button_1">Zur Kasse</button></a>
@@ -91,5 +62,6 @@
       <p>Team 3D-Druck, Copyright &copy; 2023</p>
     </footer>
     <script src="js/script.js"></script>
+    <script src="js/warenkorb.js"></script>
   </body>
 </html>
