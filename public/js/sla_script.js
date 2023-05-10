@@ -94,7 +94,7 @@ function calculate_price() {
     }).done(function (response) {
         console.log(response);
         //$('#output').html(JSON.stringify(response));
-        $('#Preis').html('<label id="Preis">'+ response.price +' €</label>');
+        $('#Preis').html('<label id="preisValue" value="'+ response.price +'">'+ response.price +' €</label>');
     }).fail(function (jqXHR, statusText, error) {
         console.log('Response Code: ' + jqXHR.status + ' - Fehlermeldung: ' + jqXHR.responseText);
         console.log('Ein Fehler ist aufgetreten');

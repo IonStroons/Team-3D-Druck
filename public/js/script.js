@@ -88,12 +88,14 @@ function showUploadButton(){
         };
 }
 
+/* Show Parameter Selection */
 function showParameterSelection(){
     const nodeList = document.querySelectorAll(".parameter_selection");
     for (let i = 0; i < nodeList.length; i++) {
         nodeList[i].style.visibility = "visible"
     }
 }
+
 /* Funktionen für Newsletter */
 $('#newsletter_submit').click(function() {
     console.log('button newsletter_submit clicked');

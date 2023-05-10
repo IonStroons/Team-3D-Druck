@@ -53,18 +53,94 @@ function jumpToDetails(id) {
     location.href = 'shopDetails.html?id=' + id;
 }
 
-function addToBasket(id) {
+function addToElementBasket(type) {
+    if (type == 'fdm'){
+        var printerid = document.getElementById('fdm_printer_selection').value;
+        var materialid = document.getElementById('fdm_material_selection').value;
 
-    // load record from api by id
-    $.ajax({
-        url: 'http://localhost:8000/api/produkt/gib/' + id,
+        var filePath = document.getElementById('myFile').value;
+        var filePathSplitt = filePath.split('\\');
+        var filename = filePathSplitt[(filePathSplitt.length)-1];
+
+        var price = document.getElementById('preisValue').getAttribute('value');
+
+        var filling = document.getElementById('fdm_filling').value;
+
+        addToBasket(printerid,materialid,filename,price,filling);
+    }
+    if (type == 'sla'){
+        var printerid = document.getElementById('sla_printer_selection').value;
+        var materialid = document.getElementById('sla_material_selection').value;
+
+        var filePath = document.getElementById('myFile').value;
+        var filePathSplitt = filePath.split('\\');
+        var filename = filePathSplitt[(filePathSplitt.length)-1];
+
+        var price = document.getElementById('preisValue').getAttribute('value');
+
+        var filling = 1;
+
+        addToBasket(printerid,materialid,filename,price,filling);
+    }
+    if (type == 'sls'){
+        var printerid = document.getElementById('sls_printer_selection').value;
+        var materialid = document.getElementById('sls_material_selection').value;
+
+        var filePath = document.getElementById('myFile').value;
+        var filePathSplitt = filePath.split('\\');
+        var filename = filePathSplitt[(filePathSplitt.length)-1];
+
+        var price = document.getElementById('preisValue').getAttribute('value');
+
+        var filling = 1;
+
+        addToBasket(printerid,materialid,filename,price,filling);
+    }
+}
+
+function addToBasket(printerid,materialid,filename,price,filling) {
+    // load printer from api by id
+    var printerCall = $.ajax({
+            url: 'http://localhost:8000/api/drucker/gib/' + printerid,
+            method: 'get',
+            contentType: 'application/json; charset=utf-8',
+            cache: false,
+            dataType: 'json'
+        }).done(function (response) {
+            //printerToAdd = response;
+        }).fail(function (jqXHR, statusText, error) {
+            console.log('Response Code: ' + jqXHR.status + ' - Fehlermeldung: ' + jqXHR.responseText);
+            alert('Ein Fehler ist aufgetreten');
+        });
+    // load material from api by id
+    var materialCall = $.ajax({
+        url: 'http://localhost:8000/api/material/gib/' + materialid,
         method: 'get',
         contentType: 'application/json; charset=utf-8',
         cache: false,
         dataType: 'json'
     }).done(function (response) {
-        var productToAdd = response;
-        console.log('trying to add to basket, product id=' + productToAdd.id);
+        //materialToAdd = response;
+    }).fail(function (jqXHR, statusText, error) {
+        console.log('Response Code: ' + jqXHR.status + ' - Fehlermeldung: ' + jqXHR.responseText);
+        alert('Ein Fehler ist aufgetreten');
+    });
+
+    $.when(printerCall, materialCall).done(function(responsePrinterCall, responseMaterialCall){
+        var printerToAdd = responsePrinterCall[0];
+        console.log(printerToAdd);
+        var materialToAdd = responseMaterialCall[0];
+        console.log(materialToAdd);
+        var productToAdd = {
+            printer: printerToAdd,
+            material: materialToAdd,
+            filename: filename,
+            price: price,
+            filling: filling,
+        }
+        
+
+        console.log('trying to add to basket, product =' + productToAdd);
 
         // get basket data from session
         if (existsSessionItem('shoppingBasket')) 
@@ -73,9 +149,17 @@ function addToBasket(id) {
         // check if product in basket
         var posInBasket = -1;
         for (i = 0; i < basket.length; i++) {
-            if (basket[i].product.id == productToAdd.id) {
-                posInBasket = i;
-                break;
+            if (basket[i].product.printer.id == productToAdd.printer.id) {
+                if (basket[i].product.material.id == productToAdd.material.id){
+                    if (basket[i].product.filename == productToAdd.filename){
+                        if(basket[i].product.price == productToAdd.price){
+                            if(basket[i].product.filling == productToAdd.filling){
+                                posInBasket = i;
+                                break;
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -95,12 +179,9 @@ function addToBasket(id) {
         setJSONSessionItem('shoppingBasket', basket);
 
         // inform user
-        alert('Produkt ' + productToAdd.bezeichnung + ' wurde zum Warenkorb hinzugefügt');
-        
-    }).fail(function (jqXHR, statusText, error) {
-        console.log('Response Code: ' + jqXHR.status + ' - Fehlermeldung: ' + jqXHR.responseText);
-        alert('Ein Fehler ist aufgetreten');
-    });
+        alert('Produkt ' + productToAdd + ' wurde zum Warenkorb hinzugefügt');
+
+        });
 }
 
 function renderBasket(parentNode) {
