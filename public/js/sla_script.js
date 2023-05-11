@@ -80,7 +80,7 @@ $(document).ready(function() {
         {
             models:
             [
-              {filename:"example.stl", display:"smooth", rotationx:-1.5, animation:{delta:{rotationz:1, msec:1000, loop:true}}},
+                {filename:"example.stl", display:"smooth", animation:{delta:{rotationy:1, msec:1000, loop:true}}},
             ]
         }
     );
