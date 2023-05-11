@@ -72,6 +72,18 @@ $(document).ready(function() {
         console.log('Response Code: ' + jqXHR.status + ' - Message: ' + jqXHR.responseText);
         alert(jqXHR.responseText);
     });
+
+    //Stadtardbild für STLViewer laden
+    stl_viewer=new StlViewer
+    (
+        document.getElementById("stl_cont"),
+        {
+            models:
+            [
+              {filename:"example.stl", display:"smooth", rotationx:-1.5, animation:{delta:{rotationz:1, msec:1000, loop:true}}},
+            ]
+        }
+    );
 });
 
 /* Funktionen für Preis berechnen */

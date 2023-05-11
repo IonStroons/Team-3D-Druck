@@ -210,15 +210,15 @@ aside#sidebar a{
   float:right;
 }
 
-#stl_viewer{
-  text-align: center;
-  height: 75%;
+#stl_cont{
   width: 75%;
-  margin: 50px;
+  height: 500px;
+  margin: 50px auto;
 }
 
 #Preis{
   text-align: left;
+  font-size: 35px;
 }
 
 .left{
@@ -249,6 +249,7 @@ aside#sidebar a{
 .parameter_selection{
   visibility: hidden;
 }
+
 
 /* Kontakt */
 .kontakt{

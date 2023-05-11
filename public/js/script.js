@@ -55,10 +55,15 @@ $('#uploadForm').submit(function(event) {
     })
     .done(function(response) {
         console.log('response received');
-        console.log(response);
+        //console.log(response);
         $('#output').html('<p>Datei erfolgreich hochgeladen</p>');
+        //Freischalen von Paramterauswahl
         showParameterSelection();
+        //Preis für hochgeladenene Datei berechnen
         calculate_price();
+        //Hochgeladenes Modell in STLViewer laden
+        stl_viewer.clean();
+        stl_viewer.add_model({local_file:document.getElementById('myFile').files[0]});
         //$('#output').append('<p>Nachricht: ' + JSON.stringify(response) + '</p>');
     })
     .fail(function(xhr) {
@@ -80,7 +85,7 @@ function showUploadButton(){
             case 'stl':
             case 'STL':
                 //Show Upload Button
-                document.getElementById ("upload_button").style .visibility ="visible";
+                document.getElementById ("upload_button").style.visibility ="visible";
                 break;
             default:
                 //Meldung für falsches Dateiformat
