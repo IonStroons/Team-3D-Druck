@@ -2,6 +2,7 @@
 $('#bestellen').click(function() {
     console.log('button bestellen clicked');
 
+    //Zu Sendende Daten in Variable ablegen
     var name = document.querySelector("#name").value;
     var vorname = document.querySelector("#first_name").value;
     var email = document.querySelector("#email").value;
@@ -12,8 +13,10 @@ $('#bestellen').click(function() {
     var plz = document.querySelector("#postcode").value;
     var hinweis = document.querySelector("#message").value;
     
+    //Objekt erzeuegn in dem die zu sendenen Daten liegnen
     var obj = { 'name': name, 'vorname': vorname, 'email': email, 'land': land, 'ort': ort, 'strasse_hausnummer': strasse_hausnummer, 'tel': tel, 'plz': plz, 'hinweis': hinweis };
     
+    //Objekt an Server übertgaen und in Datenbank schreiben
     $.ajax({
         url: 'http://localhost:8000/api/bestellformular',
         method: 'post',
@@ -61,7 +64,7 @@ $('#uploadForm').submit(function(event) {
         showParameterSelection();
         //Preis für hochgeladenene Datei berechnen
         calculate_price();
-        //Hochgeladenes Modell in STLViewer laden
+        //Hochgeladenes Modell in STLViewer laden und die zuvor geladene Datei entfernen
         stl_viewer.clean();
         stl_viewer.add_model({local_file:document.getElementById('myFile').files[0]});
         //$('#output').append('<p>Nachricht: ' + JSON.stringify(response) + '</p>');
@@ -80,11 +83,12 @@ function showUploadButton(){
     //Check File
     var file = document.getElementById('myFile');
 
+    // Dateiendung auf "stl" überprüfen
     var ext = file.value.match(/\.([^\.]+)$/)[1];
         switch (ext) {
             case 'stl':
             case 'STL':
-                //Show Upload Button
+                //Nur falls richtiges Dateiformat wird der Uploadbutton sichtbar
                 document.getElementById ("upload_button").style.visibility ="visible";
                 break;
             default:
@@ -95,7 +99,9 @@ function showUploadButton(){
 
 /* Show Parameter Selection */
 function showParameterSelection(){
+    //Auswahl der Klasse die Sichtbar gemacht werden soll
     const nodeList = document.querySelectorAll(".parameter_selection");
+    //Über alle Unterpunkte laufen und deren Sichbarkeit ändern
     for (let i = 0; i < nodeList.length; i++) {
         nodeList[i].style.visibility = "visible"
     }
@@ -105,13 +111,16 @@ function showParameterSelection(){
 $('#newsletter_submit').click(function() {
     console.log('button newsletter_submit clicked');
 
+    //Newsletter Email in Variable legen
     var email = document.querySelector("#newsletter_input").value;
 
+    //Schauen ob Variable nicht leer ist
     if(email == ""){
         alert("E-Mail nicht vorhanden!");
     }else{  
+        //Objekt erstellen welches zum Server geschickt wird
         var obj = {'email': email};
-        
+        //Objekt an Server übertragen und in Newsletter Datenbank ablegen
         $.ajax({
             url: 'http://localhost:8000/api/newsletter',
             method: 'post',

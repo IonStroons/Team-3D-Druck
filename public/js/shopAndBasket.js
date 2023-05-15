@@ -1,5 +1,6 @@
 var basket = [];
 
+//Funktion um einen Wert der mit . geschrieben wird in ein , Wert umzuwandeln mit 2 Nachkomma stellen
 function formatToEuro(val) {
     if (val === null || val === undefined) 
         val = 0.0;
@@ -7,6 +8,7 @@ function formatToEuro(val) {
     return asString.replace('.', ',') + " €";
 }
 
+//Funktion um einen Wert der mit . geschrieben wird in ein , Wert umzuwandeln der aus der Datenbank kommt
 function formatToEuroData(val) {
     if (val === null || val === undefined) 
         val = 0.0;
@@ -14,47 +16,66 @@ function formatToEuroData(val) {
     return asString.replace('.', ',') + " €";
 }
 
+//Funktion welche die Korrekten Parameter zum Warenkorb hinzufügt
 function addToElementBasket(type) {
+    //Typ FDM Druck
     if (type == 'fdm'){
+        //Ausgewählter Drucker und Material in Variable ablegen
         var printerid = document.getElementById('fdm_printer_selection').value;
         var materialid = document.getElementById('fdm_material_selection').value;
 
+        //Dateinamen in Variable ablegen
         var filePath = document.getElementById('myFile').value;
         var filePathSplitt = filePath.split('\\');
         var filename = filePathSplitt[(filePathSplitt.length)-1];
 
+        //Berechneter Preis in Variable ablegen
         var price = document.getElementById('preisValue').getAttribute('value');
 
+        //Füllung in Variable ablegen
         var filling = document.getElementById('fdm_filling').value;
 
+        //Variablen in Funktion zum Warenkorb hinzufügen übergeben
         addToBasket(printerid,materialid,filename,price,filling);
     }
+    //Typ SLA Druck
     if (type == 'sla'){
+        //Ausgewählter Drucker und Material in Variable ablegen
         var printerid = document.getElementById('sla_printer_selection').value;
         var materialid = document.getElementById('sla_material_selection').value;
 
+        //Dateinamen in Variable ablegen
         var filePath = document.getElementById('myFile').value;
         var filePathSplitt = filePath.split('\\');
         var filename = filePathSplitt[(filePathSplitt.length)-1];
 
+        //Berechneter Preis in Variable ablegen
         var price = document.getElementById('preisValue').getAttribute('value');
 
+        //Füllung in Variable ablegen, hier 1 da SLA Drucke immer Voll sind, wie 100%
         var filling = 1;
 
+        //Variablen in Funktion zum Warenkorb hinzufügen übergeben
         addToBasket(printerid,materialid,filename,price,filling);
     }
+    //Typ SLS Druck
     if (type == 'sls'){
+        //Ausgewählter Drucker und Material in Variable ablegen
         var printerid = document.getElementById('sls_printer_selection').value;
         var materialid = document.getElementById('sls_material_selection').value;
 
+        //Dateinamen in Variable ablegen
         var filePath = document.getElementById('myFile').value;
         var filePathSplitt = filePath.split('\\');
         var filename = filePathSplitt[(filePathSplitt.length)-1];
 
+        //Berechneter Preis in Variable ablegen
         var price = document.getElementById('preisValue').getAttribute('value');
 
+        //Füllung in Variable ablegen, hier 1 da SLS Drucke immer Voll sind, wie 100%
         var filling = 1;
 
+        //Variablen in Funktion zum Warenkorb hinzufügen übergeben
         addToBasket(printerid,materialid,filename,price,filling);
     }
 }
@@ -87,11 +108,17 @@ function addToBasket(printerid,materialid,filename,price,filling) {
         alert('Ein Fehler ist aufgetreten');
     });
 
+    //Ausführen sobald beide Antworten vom Server gekommen sind für Drucker und Material
     $.when(printerCall, materialCall).done(function(responsePrinterCall, responseMaterialCall){
+        //Ausgewählten Durcker in Variable ablegen (aus Response)
         var printerToAdd = responsePrinterCall[0];
         //console.log(printerToAdd);
+
+        //Ausgewähltes Material in Variable ablegen (aus Response)
         var materialToAdd = responseMaterialCall[0];
         //console.log(materialToAdd);
+
+        //Objekt mit Daten erzuegen
         var productToAdd = {
             printer: printerToAdd,
             material: materialToAdd,
@@ -109,6 +136,7 @@ function addToBasket(printerid,materialid,filename,price,filling) {
 
         // check if product in basket
         var posInBasket = -1;
+        //Über alle Eigenschaften laufen und falls diese Gleich sind, wird die Variable posInBasket geändert
         for (i = 0; i < basket.length; i++) {
             if (basket[i].product.printer.id == productToAdd.printer.id) {
                 if (basket[i].product.material.id == productToAdd.material.id){
@@ -238,7 +266,6 @@ function incrementPosition(idx) {
         // increment position at idx
         newAmount = basket[idx].amount + 1;
         basket[idx].amount = newAmount;
-
         // remember changes in localStorage
         setJSONSessionItem('shoppingBasket', basket);
     // redraw basket

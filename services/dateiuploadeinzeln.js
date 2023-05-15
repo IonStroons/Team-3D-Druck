@@ -23,6 +23,8 @@ serviceRouter.post('/dateiuploadeinzeln', async(request, objponse) => {
             // if target directory is not existent, it is created automatically
             // keep in mind that the files have to use unique file names, otherwise they are overwritten!
             console.log('saving file to target directory on server');
+
+            //Datei in files Ordner ablegen
             myFile.mv('./files/' + myFile.name);
 
             

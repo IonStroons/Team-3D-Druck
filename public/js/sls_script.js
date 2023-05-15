@@ -1,6 +1,7 @@
 $(document).ready(function() {
     console.log('Document ready, loading data from Service');
 
+    //Laden aller Drucker und Ausfilter nach Drucktyp
     $.ajax({
         url: 'http://localhost:8000/api/drucker/alle',
         method: 'get',
@@ -11,15 +12,17 @@ $(document).ready(function() {
         console.log('Data loaded successfully');
         console.log(response);
             
-        // unterobjekte erstellen
+        //Selectfeld erstellen
         var select = $('<select id="sls_printer_selection" onchange="calculate_price()">');
-            
+        
+        //Über komplette Response aller Drucker gehen
         for (i = 0; i < response.length; i++) {
             // Objekt aus array holen
             var obj = response[i];
 
+            //Drucker ausfilern die zu gesuchtem Typ gehören
             if (obj.typ == "sls"){
-                // option erstellen
+                // option erstellen und die id als Value anhängen
                 option = $('<option>');
                 option.prop('value', obj.id);
                 option.text(obj.drucker);
@@ -38,7 +41,7 @@ $(document).ready(function() {
 
 
 
-    //Laden der Materialien
+    //Laden aller Materialien und Ausfilter nach Drucktyp
     $.ajax({
         url: 'http://localhost:8000/api/material/alle',
         method: 'get',
@@ -48,15 +51,18 @@ $(document).ready(function() {
     }).done(function (response) {
         console.log('Data loaded successfully');
         console.log(response);
-            
+        
+        //Selectfeld erstellen
         var select = $('<select id="sls_material_selection" onchange="calculate_price()">');
-            
+        
+        //Über komplette Response aller Materialien gehen
         for (i = 0; i < response.length; i++) {
             // Objekt aus array holen
             var obj = response[i];
 
+            //Materialien ausfilern die zu gesuchtem Typ gehören
             if (obj.typ == "sls"){
-                // option erstellen
+                // option erstellen und die id als Value anhängen
                 option = $('<option>');
                 option.prop('value', obj.id);
                 option.text(obj.material);
@@ -89,14 +95,18 @@ $(document).ready(function() {
 /* Funktionen für Preis berechnen */
 function calculate_price() {
     console.log('change detekted calculation new Price');
+    //Hochgeladenene Datei in eine Variable ablegen
     var filePath = document.getElementById('myFile').value;
     var filePathSplitt = filePath.split('\\');
     var fileName = filePathSplitt[(filePathSplitt.length)-1];
 
+    //Ausgewählte optionenen in Variablenen ablegen
     var materialid = document.querySelector("#sls_material_selection").value;
     //console.log(materialid);
+    //Objekt erzeuegen mit ausgewählten Optionen für Preisberechnung auf Server
     var obj = {'materialid': materialid, 'filename' : fileName};
     
+    //Preisberechungsservice auf Server aufrufen und das erstellte Objekt übergeben
     $.ajax({
         url: 'http://localhost:8000/api/stl/sls',
         method: 'post',
