@@ -7,7 +7,7 @@ var serviceRouter = express.Router();
 console.log('- Service stl');
 
 serviceRouter.post('/stl/fdm', async(request, objponse) => {
-    console.log('Service stl called');
+    console.log('FDM Service stl called');
 
     try {
         //Verbindung zu DB herstellen und Material aus DB lesen
@@ -47,7 +47,7 @@ serviceRouter.post('/stl/fdm', async(request, objponse) => {
 });
 
 serviceRouter.post('/stl/sla', async(request, objponse) => {
-    console.log('Service stl called');
+    console.log('SLA Service stl called');
 
     try {
         //Verbindung zu DB herstellen und Material aus DB lesen
@@ -86,7 +86,7 @@ serviceRouter.post('/stl/sla', async(request, objponse) => {
 });
 
 serviceRouter.post('/stl/sls', async(request, objponse) => {
-    console.log('Service stl called');
+    console.log('SLS Service stl called');
 
     try {
         //Verbindung zu DB herstellen und Material aus DB lesen
