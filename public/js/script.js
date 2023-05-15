@@ -62,11 +62,13 @@ $('#uploadForm').submit(function(event) {
         $('#output').html('<p>Datei erfolgreich hochgeladen</p>');
         //Freischalen von Paramterauswahl
         showParameterSelection();
-        //Preis für hochgeladenene Datei berechnen
-        calculate_price();
         //Hochgeladenes Modell in STLViewer laden und die zuvor geladene Datei entfernen
         stl_viewer.clean();
         stl_viewer.add_model({local_file:document.getElementById('myFile').files[0]});
+        //Preis für hochgeladenene Datei berechnen
+        setTimeout(function(){
+            calculate_price();
+        }, 3000);
         //$('#output').append('<p>Nachricht: ' + JSON.stringify(response) + '</p>');
     })
     .fail(function(xhr) {
