@@ -20,7 +20,7 @@ $(document).ready(function() {
             // Objekt aus array holen
             var obj = response[i];
 
-            //Drucker ausfilern die zu gesuchtem Typ gehören
+            //Drucker ausfiltern die zu gesuchtem Typ gehören
             if (obj.typ == "sls"){
                 // option erstellen und die id als Value anhängen
                 option = $('<option>');
