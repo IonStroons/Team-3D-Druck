@@ -161,8 +161,8 @@ header a:hover{
 }
 
 #newsletter button:hover {
-  border-color: 1px black;
-  background-color: #35424a;
+  color: #35424a;
+  background-color: #1e81ce;
 }
 
 /* Boxen */
