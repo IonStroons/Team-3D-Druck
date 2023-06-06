@@ -68,17 +68,8 @@ try {
 
     serviceRouter = require('./services/material.js');
     app.use(TOPLEVELPATH, serviceRouter);
-    
-    serviceRouter = require('./services/download.js');
-    app.use(TOPLEVELPATH, serviceRouter);
-
-    serviceRouter = require('./services/zahlungsart.js');
-    app.use(TOPLEVELPATH, serviceRouter);
 
     serviceRouter = require('./services/dateiuploadeinzeln.js');
-    app.use(TOPLEVELPATH, serviceRouter);
-
-    serviceRouter = require('./services/dateiuploadmehrere.js');
     app.use(TOPLEVELPATH, serviceRouter);
 
     serviceRouter = require('./services/stl.js');
@@ -99,12 +90,10 @@ try {
 
     var webServer = app.listen(HTTP_PORT, () => {
         console.log('Listening at localhost, port ' + HTTP_PORT);
-        console.log('http://localhost:' + HTTP_PORT);
-        console.log('\nUsage: http://localhost:' + HTTP_PORT + TOPLEVELPATH + "/SERVICENAME/SERVICEMETHOD/....");
-        console.log('\nVersion 4.0, 21.02.2023\nSommersemester 2023, HS Albstadt-Sigmaringen, INF');
-        console.log('\n\n-----------------------------------------');
+        console.log('\nhttp://localhost:' + HTTP_PORT);
+        console.log('\n-----------------------------------------');
         console.log('exit / stop Server by pressing 2 x CTRL-C');
-        console.log('-----------------------------------------\n\n');
+        console.log('-----------------------------------------\n');
     });
 
 } catch (ex) {
