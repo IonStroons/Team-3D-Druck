@@ -43,10 +43,10 @@ class BestellformularDao {
         return false;
     }
 
-    create(name = '', vorname = '', email = '', land = '', ort = '', strasse_hausnummer = '', tel , plz, hinweis = '') {
-        var sql = 'INSERT INTO bestellformular (name,vorname,email,land,ort,strasse_hausnummer,tel,plz,hinweis) VALUES (?,?,?,?,?,?,?,?,?)';
+    create(name = '', vorname = '', email = '', land = '', ort = '', strasse_hausnummer = '', tel , plz, hinweis = '', basket = '') {
+        var sql = 'INSERT INTO bestellformular (name,vorname,email,land,ort,strasse_hausnummer,tel,plz,hinweis,basket) VALUES (?,?,?,?,?,?,?,?,?,?)';
         var statement = this._conn.prepare(sql);
-        var params = [name, vorname, email, land, ort, strasse_hausnummer, tel, plz, hinweis];
+        var params = [name, vorname, email, land, ort, strasse_hausnummer, tel, plz, hinweis, basket];
         var result = statement.run(params);
 
         if (result.changes != 1) 
@@ -55,10 +55,10 @@ class BestellformularDao {
         return this.loadById(result.lastInsertRowid);
     }
 
-    update(id, name = '', vorname = '', email = '', land = '', ort = '', strasse_hausnummer = '', tel , plz, hinweis = '') {
-        var sql = 'UPDATE bestellformular SET name=?,vorname=?,email=?,land=?,ort=?,strasse_hausnummer=?,tel=?,plz=?,hinweis=? WHERE id=?';
+    update(id, name = '', vorname = '', email = '', land = '', ort = '', strasse_hausnummer = '', tel , plz, hinweis = '', basket = '') {
+        var sql = 'UPDATE bestellformular SET name=?,vorname=?,email=?,land=?,ort=?,strasse_hausnummer=?,tel=?,plz=?,hinweis=?,basket=? WHERE id=?';
         var statement = this._conn.prepare(sql);
-        var params = [id, name, vorname, email, land, ort, strasse_hausnummer, tel, plz, hinweis];
+        var params = [id, name, vorname, email, land, ort, strasse_hausnummer, tel, plz, hinweis, basket];
         var result = statement.run(params);
 
         if (result.changes != 1) 

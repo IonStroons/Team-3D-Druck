@@ -51,18 +51,42 @@ serviceRouter.post("/bestellformular", function(request, response) {
     console.log("Service bestellformular: Client requested creation of new record");
 
     var errorMsgs=[];
-    if (helper.isUndefined(request.body.name)) 
+    if (helper.isUndefined(request.body.name)) {
         errorMsgs.push("Nachname fehlt");
-    if (helper.isUndefined(request.body.vorname)) 
+    } else if (request.body.name == '') {
+        errorMsgs.push("Nachname fehlt");
+    }
+
+    if (helper.isUndefined(request.body.vorname)) {
         errorMsgs.push("Vorname fehlt");
-    if (helper.isUndefined(request.body.email)) 
-        errorMsgs.push("Email fehlt");
-    if (helper.isUndefined(request.body.land)) 
-        errorMsgs.push("bezeichnung fehlt");
-    if (helper.isUndefined(request.body.ort)) 
+    } else if (request.body.vorname == '') {
+        errorMsgs.push("Vorname fehlt");
+    }
+
+    if (helper.isUndefined(request.body.email)) {
+        errorMsgs.push("E-Mail fehlt");
+    } else if (request.body.email == '') {
+        errorMsgs.push("E-Mail fehlt");
+    }
+       
+    if (helper.isUndefined(request.body.land)) {
+        errorMsgs.push("Land fehlt");
+    } else if (request.body.land == '') {
+        errorMsgs.push("Land fehlt");
+    }
+        
+    if (helper.isUndefined(request.body.ort)) {
         errorMsgs.push("Ort fehlt");
-    if (helper.isUndefined(request.body.strasse_hausnummer)) 
+    } else if (request.body.ort == '') {
+        errorMsgs.push("Ort fehlt");
+    }
+        
+    if (helper.isUndefined(request.body.strasse_hausnummer)) {
         errorMsgs.push("Strasse/Hausnummer fehlt");
+    } else if (request.body.strasse_hausnummer == '') {
+        errorMsgs.push("Strasse/Hausnummer fehlt");
+    }
+       
 
     if (helper.isUndefined(request.body.tel)) {
         errorMsgs.push("tel fehlt");
@@ -70,6 +94,8 @@ serviceRouter.post("/bestellformular", function(request, response) {
         errorMsgs.push("tel muss eine Zahl sein");
     } else if (request.body.tel <= 0) {
         errorMsgs.push("tel muss eine Zahl > 0 sein");
+    } else if (request.body.tel == '') {
+        errorMsgs.push("tel fehlt");
     }
 
     if (helper.isUndefined(request.body.plz)) {
@@ -78,7 +104,12 @@ serviceRouter.post("/bestellformular", function(request, response) {
         errorMsgs.push("plz muss eine Zahl sein");
     } else if (request.body.plz <= 0) {
         errorMsgs.push("plz muss eine Zahl > 0 sein");
+    } else if (request.body.plz == '') {
+        errorMsgs.push("plz fehlt");
     }
+
+    if (helper.isUndefined(request.body.basket)) 
+        errorMsgs.push("Basket fehlt");
     
     if (errorMsgs.length > 0) {
         console.log("Service bestellformular: Creation not possible, data missing");
@@ -88,7 +119,7 @@ serviceRouter.post("/bestellformular", function(request, response) {
 
     const bestellformularDao = new BestellformularDao(request.app.locals.dbConnection);
     try {
-        var obj = bestellformularDao.create(request.body.name, request.body.vorname, request.body.email, request.body.land, request.body.ort, request.body.strasse_hausnummer, request.body.tel, request.body.plz, request.body.hinweis);
+        var obj = bestellformularDao.create(request.body.name, request.body.vorname, request.body.email, request.body.land, request.body.ort, request.body.strasse_hausnummer, request.body.tel, request.body.plz, request.body.hinweis, request.body.basket);
         console.log("Service bestellformular: Record inserted");
         response.status(200).json(obj);
     } catch (ex) {
@@ -101,20 +132,46 @@ serviceRouter.put("/bestellformular", function(request, response) {
     console.log("Service bestellformular: Client requested update of existing record");
 
     var errorMsgs=[];
-    if (helper.isUndefined(request.body.id)) 
+    if (helper.isUndefined(request.body.id)) {
         errorMsgs.push("id fehlt");
-    if (helper.isUndefined(request.body.name)) 
+    }
+    
+    if (helper.isUndefined(request.body.name)) {
         errorMsgs.push("Nachname fehlt");
-    if (helper.isUndefined(request.body.vorname)) 
+    } else if (request.body.name == '') {
+        errorMsgs.push("Nachname fehlt");
+    }
+
+    if (helper.isUndefined(request.body.vorname)) {
         errorMsgs.push("Vorname fehlt");
-    if (helper.isUndefined(request.body.email)) 
-        errorMsgs.push("Email fehlt");
-    if (helper.isUndefined(request.body.land)) 
-        errorMsgs.push("bezeichnung fehlt");
-    if (helper.isUndefined(request.body.ort)) 
+    } else if (request.body.vorname == '') {
+        errorMsgs.push("Vorname fehlt");
+    }
+
+    if (helper.isUndefined(request.body.email)) {
+        errorMsgs.push("E-Mail fehlt");
+    } else if (request.body.email == '') {
+        errorMsgs.push("E-Mail fehlt");
+    }
+        
+    if (helper.isUndefined(request.body.land)) {
+        errorMsgs.push("Land fehlt");
+    } else if (request.body.land == '') {
+        errorMsgs.push("Land fehlt");
+    }
+        
+    if (helper.isUndefined(request.body.ort)) {
         errorMsgs.push("Ort fehlt");
-    if (helper.isUndefined(request.body.strasse_hausnummer)) 
+    } else if (request.body.ort == '') {
+        errorMsgs.push("Ort fehlt");
+    }
+        
+    if (helper.isUndefined(request.body.strasse_hausnummer)) {
         errorMsgs.push("Strasse/Hausnummer fehlt");
+    } else if (request.body.strasse_hausnummer == '') {
+        errorMsgs.push("Strasse/Hausnummer fehlt");
+    }
+        
 
     if (helper.isUndefined(request.body.tel)) {
         errorMsgs.push("tel fehlt");
@@ -122,6 +179,8 @@ serviceRouter.put("/bestellformular", function(request, response) {
         errorMsgs.push("tel muss eine Zahl sein");
     } else if (request.body.tel <= 0) {
         errorMsgs.push("tel muss eine Zahl > 0 sein");
+    } else if (request.body.tel == '') {
+        errorMsgs.push("tel fehlt");
     }
 
     if (helper.isUndefined(request.body.plz)) {
@@ -130,7 +189,12 @@ serviceRouter.put("/bestellformular", function(request, response) {
         errorMsgs.push("plz muss eine Zahl sein");
     } else if (request.body.plz <= 0) {
         errorMsgs.push("plz muss eine Zahl > 0 sein");
+    } else if (request.body.plz == '') {
+        errorMsgs.push("plz fehlt");
     }
+
+    if (helper.isUndefined(request.body.basket)) 
+        errorMsgs.push("Basket fehlt");
     
     if (errorMsgs.length > 0) {
         console.log("Service bestellformular: Creation not possible, data missing");
@@ -140,7 +204,7 @@ serviceRouter.put("/bestellformular", function(request, response) {
 
     const bestellformularDao = new BestellformularDao(request.app.locals.dbConnection);
     try {
-        var obj = bestellformularDao.update(request.body.id, request.body.name, request.body.vorname, request.body.email, request.body.land, request.body.ort, request.body.strasse_hausnummer, request.body.tel, request.body.plz, request.body.hinweis);
+        var obj = bestellformularDao.update(request.body.id, request.body.name, request.body.vorname, request.body.email, request.body.land, request.body.ort, request.body.strasse_hausnummer, request.body.tel, request.body.plz, request.body.hinweis, request.body.basket);
         console.log("Service bestellformular: Record updated, id=" + request.body.id);
         response.status(200).json(obj);
     } catch (ex) {

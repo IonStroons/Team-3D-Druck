@@ -12,10 +12,11 @@ $('#bestellen').click(function() {
     var tel = document.querySelector("#tel").value;
     var plz = document.querySelector("#postcode").value;
     var hinweis = document.querySelector("#message").value;
-    
+    var basket = getJSONSessionItem('shoppingBasket');
+
     //Objekt erzeuegn in dem die zu sendenen Daten liegnen
-    var obj = { 'name': name, 'vorname': vorname, 'email': email, 'land': land, 'ort': ort, 'strasse_hausnummer': strasse_hausnummer, 'tel': tel, 'plz': plz, 'hinweis': hinweis };
-    
+    var obj = { 'name': name, 'vorname': vorname, 'email': email, 'land': land, 'ort': ort, 'strasse_hausnummer': strasse_hausnummer, 'tel': tel, 'plz': plz, 'hinweis': hinweis, 'basket': JSON.stringify(basket) };
+
     //Objekt Bestellformular an Server übertgaen und in Datenbank schreiben
     $.ajax({
         url: 'http://localhost:8000/api/bestellformular',
@@ -27,26 +28,10 @@ $('#bestellen').click(function() {
         console.log(response);
         //$('#output').html(JSON.stringify(response));
         $('#output').html('<p>Informationen erfolgreich gesendet</p>');
-
-        // Objekt Druckauftrag an Server übertragen und in Datenbank schreiben
-        var kundenid = response.id;
-        var basket = getJSONSessionItem('shoppingBasket');
-        var basketobj = {'kundenid': kundenid, 'basket': JSON.stringify(basket)};
-        $.ajax({
-            url: 'http://localhost:8000/api/druckauftrag',
-            method: 'post',
-            contentType: 'application/json; charset=utf-8',
-            cache: false,
-            data: JSON.stringify(basketobj)
-        }).done(function (response) {
-            console.log(response);
-            //$('#output').html(JSON.stringify(response));
-            $('#output').html('<p>Informationen erfolgreich gesendet</p>');
-            setTimeout("location.href = 'danke.html';", 2000);
-        }).fail(function (jqXHR, statusText, error) {
-            console.log('Response Code: ' + jqXHR.status + ' - Fehlermeldung: ' + jqXHR.responseText);
-            $('#output').html('Ein Fehler ist aufgetreten, probleme mit Druckauftrag');
-        });
+        emptyBasket();
+        setTimeout(function(){
+            location.href = 'danke.html';
+        }, 3000);
     }).fail(function (jqXHR, statusText, error) {
         console.log('Response Code: ' + jqXHR.status + ' - Fehlermeldung: ' + jqXHR.responseText);
         $('#output').html('Ein Fehler ist aufgetreten, probleme mit Bestellformular');

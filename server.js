@@ -63,9 +63,6 @@ try {
     var serviceRouter = require('./services/bestellformular.js');
     app.use(TOPLEVELPATH, serviceRouter);
 
-    serviceRouter = require('./services/druckauftrag.js');
-    app.use(TOPLEVELPATH, serviceRouter);
-
     serviceRouter = require('./services/drucker.js');
     app.use(TOPLEVELPATH, serviceRouter);
 
