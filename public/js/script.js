@@ -118,11 +118,12 @@ function showUploadButton(){
 /* Show Parameter Selection */
 function showParameterSelection(){
     //Auswahl der Klasse die Sichtbar gemacht werden soll
-    const nodeList = document.querySelectorAll(".parameter_selection");
+    const nodeList = document.querySelectorAll(".parameter_selection, .bubble");
     //Über alle Unterpunkte laufen und deren Sichbarkeit ändern
     for (let i = 0; i < nodeList.length; i++) {
         nodeList[i].style.visibility = "visible"
     }
+
 }
 
 /* Funktionen für Newsletter */

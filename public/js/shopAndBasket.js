@@ -202,6 +202,7 @@ function renderBasket(parentNode) {
            
             node.append($('<td>').text(idx + 1));
             node.append($('<td>').text(item.product.filename));
+            node.append($('<td>').text(item.product.printer.drucker));
             node.append($('<td>').text(formatToEuroData(item.product.price)));
             node.append(
                 $('<td>')
@@ -235,8 +236,8 @@ function renderBasket(parentNode) {
         });
 
         $(parentNode)
-            .append('<tr><td colspan="6">&nbsp;</td></tr>')
-            .append('<tr><td colspan="4">Gesamtsumme: </td><td class="bold">' + formatToEuro(totalSum) + '</td></tr>')
+            .append('<tr><td colspan="7">&nbsp;</td></tr>')
+            .append('<tr><td colspan="5">Gesamtsumme: </td><td class="bold">' + formatToEuro(totalSum) + '</td></tr>')
     }
 }
 
